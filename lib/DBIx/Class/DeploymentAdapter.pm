@@ -80,11 +80,12 @@ Installs the schema files to the given Database
 
 sub install {
 
-    my ( $self ) = @_;
+    my $self = shift;
+    my @params = @_;
 
     return unless $self->dh;
 
-    $self->dh->install;
+    $self->dh->install(@params);
 }
 
 =head2 prepare
@@ -162,19 +163,21 @@ sub upgrade_incremental {
     my $start_version  = $self->dh->database_version + 1;
     my $target_version = $self->dh->schema->schema_version;
 
-    for my $version ( $start_version .. $target_version ) {
+    for my $upgrade_version ( $start_version .. $target_version ) {
 
-        if( $to_version && $version >= $to_version ) {
+        my $version = $self->dh->database_version;
+
+        if( $to_version && $version > $to_version ) {
             next;
         }
 
-        warn "upgrading to version $version\n";
+        warn "upgrading to version $upgrade_version\n";
 
         eval {
-            my ( $ddl, $sql ) = @{ $self->dh->upgrade_single_step( { version_set => [ $version - 1, $version ] } ) || [] };    # from last version to desired version
+            my ( $ddl, $sql ) = @{ $self->dh->upgrade_single_step( { version_set => [ $version, $upgrade_version ] } ) || [] };    # from last version to desired version
             $self->dh->add_database_version(
                 {
-                    version     => $version,
+                    version     => $upgrade_version,
                     ddl         => $ddl,
                     upgrade_sql => $sql,
                 }
