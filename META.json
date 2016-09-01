@@ -48,7 +48,7 @@
       }
    },
    "release_status" : "unstable",
-   "version" : "0.05",
+   "version" : "0.06",
    "x_authority" : "cpan:MOVEAX",
    "x_contributors" : [
       "Patrick Kilter <pas.freelance@gmail.com>",
