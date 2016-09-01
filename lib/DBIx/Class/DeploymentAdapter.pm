@@ -42,6 +42,22 @@ sub install {
     $self->dh->install;
 }
 
+sub backup {
+
+    my ( $self, $dbname ) = @_;
+
+    return unless $self->dh;
+
+    $self->dh->version_storage_is_installed
+      || die "No Database to populate!";
+
+    my $version = $self->dh->database_version;
+
+    my $response = qx~mysqldump $dbname | gzip /tmp/$dbname.sql.gz~;
+
+    die "Backup: $response" if $response;
+}
+
 sub prepare {
 
     my ($self) = @_;
