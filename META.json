@@ -1,10 +1,10 @@
 {
-   "abstract" : "It's new $module",
+   "abstract" : "Deployment handler adapter to your DBIC app, which offers some candy",
    "author" : [
-      "Patrick Kilter <pas.freelance@googlemail.com>"
+      "Patrick Kilter <pk@gassmann.it>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Minilla/v2.4.1, CPAN::Meta::Converter version 2.142690",
+   "generated_by" : "Minilla/v2.4.1, CPAN::Meta::Converter version 2.150010",
    "license" : [
       "perl_5"
    ],
@@ -42,16 +42,17 @@
       },
       "runtime" : {
          "requires" : {
+            "DBIx::Class::DeploymentHandler" : "0",
             "perl" : "5.008001"
-         }
-      },
-      "test" : {
-         "requires" : {
-            "Test::More" : "0.98"
          }
       }
    },
    "release_status" : "unstable",
    "version" : "0.01",
-   "x_authority" : "cpan:MOVEAX"
+   "x_authority" : "cpan:MOVEAX",
+   "x_contributors" : [
+      "Patrick Kilter <pas.freelance@gmail.com>",
+      "Patrick Kilter <pas.freelance@googlemail.com>"
+   ],
+   "x_serialization_backend" : "JSON::PP version 2.27400"
 }
