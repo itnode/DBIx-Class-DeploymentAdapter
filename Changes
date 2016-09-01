@@ -2,6 +2,10 @@ Revision history for Perl extension DBIx-Class-DeploymentAdapter
 
 {{$NEXT}}
 
+0.05 2016-09-01T10:02:43Z
+
+    - removed to specific backup method
+
 0.04 2016-09-01T09:47:35Z
 
     - removed warnings
