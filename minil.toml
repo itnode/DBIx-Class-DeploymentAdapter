@@ -1,0 +1,6 @@
+name = "DBIx-Class-DeploymentAdapter"
+# badges = ["travis"]
+authority="cpan:MOVEAX"
+
+module_maker="ModuleBuildTiny"
+
