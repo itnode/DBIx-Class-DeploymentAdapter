@@ -167,7 +167,7 @@ sub upgrade_incremental {
 
         my $version = $self->dh->database_version;
 
-        if( $to_version && $version > $to_version ) {
+        if( $to_version && $upgrade_version > $to_version ) {
             next;
         }
 
