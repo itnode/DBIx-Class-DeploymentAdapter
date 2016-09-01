@@ -5,6 +5,34 @@ use warnings;
 
 our $VERSION = "0.06";
 
+=encoding utf-8
+
+=head1 NAME
+
+DBIx::Class::DeploymentAdapter - Deployment handler adapter to your DBIC app, which offers some candy
+
+=head1 SYNOPSIS
+
+    use DBIx::Class::DeploymentAdapter;
+
+    my $args = {
+        schema              => $schema,
+        script_directory    => './share/migrations',
+        databases           => ['MySQL'],
+        sql_translator_args => { mysql_enable_utf8 => 1 },
+    };
+
+    $args->{to_version}      = $to_version      if $to_version;
+    $args->{force_overwrite} = $force_overwrite if $force_overwrite;
+
+    my $da = DBIx::Class::DeploymentAdapter->new($args);
+
+=head1 DESCRIPTION
+
+Deployment handler adapter to your DBIC app, which offers some candy
+
+=cut
+
 use DBIx::Class::DeploymentHandler;
 
 use Moose;
@@ -42,6 +70,14 @@ sub BUILD {
     $self->dh($args);
 }
 
+=head2 install
+
+Installs the schema files to the given Database
+
+    $da->install;
+
+=cut
+
 sub install {
 
     my ( $self ) = @_;
@@ -50,6 +86,14 @@ sub install {
 
     $self->dh->install;
 }
+
+=head2 prepare
+
+Summarize all prepares from L<DBIx::Class::DeploymentHandler> in one Command
+
+    $da->prepare;
+
+=cut
 
 sub prepare {
 
@@ -77,6 +121,14 @@ sub prepare {
     );
 }
 
+=head2 status
+
+Returns the Status of database and schema versions as string
+
+    $da->status;
+
+=cut
+
 sub status {
 
     my ( $self ) = @_;
@@ -89,6 +141,17 @@ sub status {
     return sprintf( "Schema is %s\nDeployed database is %s\n", $schema_version, $deployed_version );
 
 }
+
+=head2 upgrade_incremental
+
+Upgrade the database version step by step, if anything wents wrong, it dies with the specific database error.
+
+You can give a target version to the method to make it stop there
+
+    $da->upgrade_incremental;
+    $da->upgrade_incremental(112);
+
+=cut
 
 sub upgrade_incremental {
 
@@ -128,21 +191,7 @@ sub upgrade_incremental {
 
 1;
 
-__END__
 
-=encoding utf-8
-
-=head1 NAME
-
-DBIx::Class::DeploymentAdapter - Deployment handler adapter to your DBIC app, which offers some candy
-
-=head1 SYNOPSIS
-
-    use DBIx::Class::DeploymentAdapter;
-
-=head1 DESCRIPTION
-
-Deployment handler adapter to your DBIC app, which offers some candy
 
 =head1 LICENSE
 
