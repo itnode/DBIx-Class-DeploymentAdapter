@@ -26,25 +26,21 @@ sub dh {
         $args->{databases}           ||= ["MySQL"];
         $args->{sql_translator_args} ||= { mysql_enable_utf8 => 1 };
 
-        $self->dh_store( DBIx::Class::DeploymentHandler->new($args) );
+        my $dh = DBIx::Class::DeploymentHandler->new($args);
+        $self->dh_store( $dh );
 
     }
 
     return $self->dh_store;
 }
 
-around BUILDARGS => sub {
+sub BUILD {
 
-    my $orig = shift;
-    my $class = shift;
+    my $self = shift;
+    my $args = shift;
 
-    if( @_ == 1 && ref $_[0] eq "HASH" ) {
-
-        $class->dh($_[0]);
-    }
-
-    return $class->$orig(@_);
-};
+    $self->dh($args);
+}
 
 sub install {
 
@@ -101,7 +97,7 @@ sub status {
 
     my ( $self ) = @_;
 
-    return unless $self->dh;
+    return unless ref $self->dh;
 
     my $deployed_version = $self->dh->database_version;
     my $schema_version   = $self->dh->schema->schema_version;
