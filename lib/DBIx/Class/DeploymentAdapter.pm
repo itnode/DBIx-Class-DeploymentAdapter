@@ -33,6 +33,19 @@ sub dh {
     return $self->dh_store;
 }
 
+around BUILDARGS => sub {
+
+    my $orig = shift;
+    my $class = shift;
+
+    if( @_ == 1 && ref $_[0] eq "HASH" ) {
+
+        $class->dh($_[0]);
+    }
+
+    return $class->$orig(@_);
+}
+
 sub install {
 
     my ( $self ) = @_;
