@@ -112,9 +112,6 @@ sub upgrade_incremental {
 
     return unless $self->dh;
 
-    my $start_version  = $self->dh->database_version;
-    my $target_version = $self->dh->schema->schema_version;
-
     my $start_version  = $self->dh->database_version + 1;
     my $target_version = $self->dh->schema->schema_version;
 
