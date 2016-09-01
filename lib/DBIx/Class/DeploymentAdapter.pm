@@ -83,7 +83,7 @@ sub status {
 
 sub upgrade_incremental {
 
-    my ( $self ) = @_;
+    my ( $self, $to_version ) = @_;
 
     return unless $self->dh;
 
@@ -95,7 +95,7 @@ sub upgrade_incremental {
 
     for my $version ( $start_version .. $target_version ) {
 
-        if( $options->{to_version} && $version >= $options->{to_version} ) {
+        if( $to_version && $version >= $to_version ) {
             next;
         }
 
