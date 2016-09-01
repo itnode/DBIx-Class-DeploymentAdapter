@@ -48,6 +48,17 @@
       }
    },
    "release_status" : "unstable",
+   "resources" : {
+      "bugtracker" : {
+         "web" : "https://github.com/itnode/DBIx-Class-DeploymentAdapter/issues"
+      },
+      "homepage" : "https://github.com/itnode/DBIx-Class-DeploymentAdapter",
+      "repository" : {
+         "type" : "git",
+         "url" : "git://github.com/itnode/DBIx-Class-DeploymentAdapter.git",
+         "web" : "https://github.com/itnode/DBIx-Class-DeploymentAdapter"
+      }
+   },
    "version" : "0.06",
    "x_authority" : "cpan:MOVEAX",
    "x_contributors" : [
