@@ -63,7 +63,8 @@
    "x_authority" : "cpan:MOVEAX",
    "x_contributors" : [
       "Patrick Kilter <pas.freelance@gmail.com>",
-      "Patrick Kilter <pas.freelance@googlemail.com>"
+      "Patrick Kilter <pas.freelance@googlemail.com>",
+      "Jens Gassmann <jens.gassmann@atomix.de>"
    ],
    "x_serialization_backend" : "JSON::PP version 2.27300"
 }
